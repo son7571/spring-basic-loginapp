@@ -19,18 +19,18 @@ public class BoardController {
         User sessionUser = (User) session.getAttribute("sessionUser");
 
         if (sessionUser == null) {
-            request.setAttribute("models", boardService.글목록보기(null));
-        } else {
-            request.setAttribute("models", boardService.글목록보기(sessionUser.getId()));
+            session.setAttribute("msg", "로그인이 필요합니다");
+            return "redirect:/login-form";
         }
 
+        request.setAttribute("models", boardService.글목록보기(sessionUser.getId()));
 
         return "board/list";
     }
 
     @GetMapping("/board/save-form")
     public String saveForm() {
-        
+
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) throw new RuntimeException("인증이 필요합니다");
         return "board/save-form";

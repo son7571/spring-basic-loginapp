@@ -10,6 +10,7 @@ public class WepMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor())
+                .addPathPatterns("/", "/home", "/index") // 메인화면
                 .addPathPatterns("/user/**")
                 .addPathPatterns("/board/**")
                 .addPathPatterns("/love/**")
